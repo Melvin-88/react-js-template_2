@@ -8,7 +8,7 @@
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
     "test:watch": "npm run test -- --watch",
     "build-js": "node ./node_modules/webpack/bin/webpack.js",
-    "build-live-js": "set NODE_ENV=production && node ./node_modules/webpack/bin/webpack.js"
+    "build-live-js": "set NODE_ENV=production&& node ./node_modules/webpack/bin/webpack.js"
   },
   "author": "",
   "license": "ISC",
@@ -26,11 +26,14 @@
     "loaders.css": "^0.1.2",
     "lodash": "^4.17.2",
     "moment": "^2.18.1",
+    "node-sass": "^4.5.3",
+    "postcss-loader": "^2.0.6",
     "raven-js": "^3.9.1",
     "rc-progress": "^2.1.2",
     "rc-slider": "^7.0.8",
     "react": "^15.6.1",
     "react-bootstrap": "^0.31.3",
+    "react-captcha": "^2.0.9",
     "react-click-outside": "^2.2.0",
     "react-collapsible": "^1.4.0",
     "react-custom-radio": "^1.0.3",
@@ -60,7 +63,8 @@
     "redux-promise": "^0.5.3",
     "redux-raven-middleware": "^1.1.0",
     "redux-router": "^2.1.2",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "sass-loader": "^6.0.6"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.7",

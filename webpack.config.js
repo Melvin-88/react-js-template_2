@@ -5,6 +5,8 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 var OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
+console.log(NODE_ENV);
+
 module.exports = {
     entry: {
         app: './src/index.js'
@@ -28,10 +30,6 @@ module.exports = {
         },
             { test: /bootstrap\/js\//, loader: 'imports?jQuery=jquery' },
             {
-                test: /\.css$/,
-                loader: ExtractTextPlugin.extract("style-loader", "css-loader")
-            },
-            {
                 test: /\.html$/,
                 loader: "html"
             },
@@ -44,12 +42,21 @@ module.exports = {
             { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,    loader: "url?limit=10000&minetype=application/svg+xml&name=assets/fonts/[name].[ext]" },
             { test: /\.(jpeg|png|gif|jpg)$/,         loader: 'url-loader?limit=100000&minetype=application/file&name=assets/img/[name].[ext]' },
             {
+                test: /\.css$/,
+                loader: ExtractTextPlugin.extract("style-loader", "css-loader?importLoaders=1")
+            },
+            {
                 test: /\.less$/,
                 loader: ExtractTextPlugin.extract(
                     'css?sourceMap!' +
                     'less?sourceMap'
                 )
-            }]
+            },
+            {
+                test: /\.(sass|scss)$/,
+                loader: ExtractTextPlugin.extract(['css-loader!sass-loader?importLoaders=1'])
+            }
+        ]
     },
     resolve: {
         extensions: ['', '.js', '.jsx']
@@ -58,7 +65,7 @@ module.exports = {
         historyApiFallback: true,
         contentBase: './'
     },
-    plugins: NODE_ENV == 'production' ? [
+    plugins: NODE_ENV.toString() == 'production' ? [
             new CleanWebpackPlugin(['assets/build'], {
                 root: __dirname,
                 verbose: true,
