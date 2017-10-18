@@ -8,15 +8,29 @@ import axiosMiddleware from 'redux-axios-middleware';
 import api from "./actions/api";
 import rootReducer from "./reducers/index";
 import routes from './routes/routes';
+import Cookie from "js-cookie";
 
 import '../assets/css/bootstrap.min.css';
 import '../assets/style.css';
 import '../node_modules/react-datetime/css/react-datetime.css';
 import '../node_modules/react-select/dist/react-select.min.css';
 
+const axiosMiddlewareOptions = {
+    interceptors: {
+        request: [
+            (action, config) => {
+                if (Cookie.get('token')) {
+                    config.headers['Authorization'] = Cookie.get('token');
+                }
+
+                return config
+            }
+        ]
+    }
+};
 const history = createBrowserHistory();
 const appRouterMiddleware = routerMiddleware(history);
-const createStoreWithMiddleware = applyMiddleware(axiosMiddleware(api), appRouterMiddleware)(createStore);
+const createStoreWithMiddleware = applyMiddleware(axiosMiddleware(api, axiosMiddlewareOptions), appRouterMiddleware)(createStore);
 const store = createStoreWithMiddleware(rootReducer, {}, window.devToolsExtension ? window.devToolsExtension() : f => f);
 
 render(
