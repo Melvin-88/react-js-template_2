@@ -84,7 +84,7 @@ module.exports = {
             new webpack.NoErrorsPlugin(),
             new webpack.optimize.CommonsChunkPlugin('./assets/build/build.js', Infinity),
             new webpack.optimize.AggressiveMergingPlugin(),
-            new webpack.optimize.DedupePlugin(),
+            // new webpack.optimize.DedupePlugin(),
             new webpack.optimize.OccurenceOrderPlugin(),
             new webpack.optimize.UglifyJsPlugin({
                 beautify: false,

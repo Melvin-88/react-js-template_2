@@ -8,7 +8,8 @@
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
     "test:watch": "npm run test -- --watch",
     "build-js": "node ./node_modules/webpack/bin/webpack.js",
-    "build-live-js": "set NODE_ENV=production&& node ./node_modules/webpack/bin/webpack.js"
+    "build-live-js": "set NODE_ENV=production&& node ./node_modules/webpack/bin/webpack.js",
+    "build-mac": "NODE_ENV=production node ./node_modules/webpack/bin/webpack.js"
   },
   "author": "",
   "license": "ISC",
