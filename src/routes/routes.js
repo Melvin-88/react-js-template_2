@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import MainPage from '../containers/MainPage/MainPage';
 import NoMatch from '../containers/NoMatch/NoMatch';
-import Authentication from '../containers/Authentication/Authentication';
+// import Authentication from '../containers/Authentication/Authentication';
 
 export default (
     <App>
@@ -15,7 +15,7 @@ export default (
             <Switch>
                 <Route path='/' exact render={() => <Redirect to="/dashboard" push />}/>
                 <Route path='/dashboard' component={MainPage} />
-                <Route path='/authentication' component={Authentication} />
+                {/*<Route path='/authentication' component={Authentication} />*/}
                 <Route component={NoMatch}/>
             </Switch>
         </div>
