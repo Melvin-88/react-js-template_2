@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { ConnectedRouter, routerMiddleware } from 'react-router-redux'
 import axiosMiddleware from 'redux-axios-middleware';
+import { multiClientMiddleware } from 'redux-axios-middleware';
 import api from "./actions/api";
 import rootReducer from "./reducers/index";
 import routes from './routes/routes';
@@ -30,7 +31,7 @@ const axiosMiddlewareOptions = {
 };
 const history = createBrowserHistory();
 const appRouterMiddleware = routerMiddleware(history);
-const createStoreWithMiddleware = applyMiddleware(axiosMiddleware(api, axiosMiddlewareOptions), appRouterMiddleware)(createStore);
+const createStoreWithMiddleware = applyMiddleware(multiClientMiddleware(api, axiosMiddlewareOptions), appRouterMiddleware)(createStore);
 const store = createStoreWithMiddleware(rootReducer, {}, window.devToolsExtension ? window.devToolsExtension() : f => f);
 
 render(

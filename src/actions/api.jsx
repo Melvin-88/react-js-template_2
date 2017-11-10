@@ -1,8 +1,19 @@
 import axios from "axios";
-import { API_BASE_URL } from '../config';
+import * as apiUrl from '../config';
 
-export const api = axios.create({
-  baseURL: API_BASE_URL
-});
+export const api = {
+    default:{
+        client: axios.create({
+            baseURL: apiUrl.API_BASE_URL,
+            responseType: 'json'
+        })
+    },
+    second:{
+        client: axios.create({
+            baseURL: apiUrl.API_SECOND_URL,
+            responseType: 'json'
+        })
+    }
+};
 
 export default api;
