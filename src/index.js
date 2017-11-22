@@ -11,8 +11,6 @@ import rootReducer from "./reducers/index";
 import routes from './routes/routes';
 import Cookie from "js-cookie";
 
-import '../assets/css/bootstrap.min.css';
-import '../assets/style.css';
 import '../node_modules/react-datetime/css/react-datetime.css';
 import '../node_modules/react-select/dist/react-select.min.css';
 

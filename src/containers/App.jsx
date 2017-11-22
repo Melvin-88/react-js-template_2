@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from "react";
+import bootstrap from 'bootstrap/dist/css/bootstrap.min.css';
+import style from '../style/main.scss';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class App extends Component {
