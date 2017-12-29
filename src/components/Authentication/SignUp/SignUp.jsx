@@ -26,7 +26,7 @@ const renderFieldPhone = ({ input, label, placeholder, type, mask, id, meta: { t
     </label>
 );
 
-class SingIn extends Component {
+class SignUp extends Component {
     SubmitForm=(data)=>{
         let obj = {
             phone: data.phone.replace(/[-()]/gim,''),
@@ -42,8 +42,8 @@ class SingIn extends Component {
     getError=(error)=>{
         let message = [];
         for (let key in error) {
-                message.push(error[key]);
-            }
+            message.push(error[key]);
+        }
         return(
             message.map((el, i)=>{
                 return (
@@ -59,28 +59,16 @@ class SingIn extends Component {
         const { handleSubmit, submitting, main:{error} } = this.props;
         return (
             <div>
-                <div className="container">
-                    <div className="sign-up-block">
-                        <div className="authentication__box">
-                            <div className="inner__block">
-                                <form onSubmit={handleSubmit(this.SubmitForm.bind(this))}>
-                                    <div className="form-wrapper">
-                                        <h2>Войти в систему</h2>
-                                        <div className="line__block">
-                                            <span className="border__line" />
-                                        </div>
-                                        <Field name="phone" type="tel" component={renderFieldPhone} mask={"+11(111)111-11-11"} placeholder="Телефон" autoComplete='off'/>
-                                        <Field name="password" type="password" component={renderField} placeholder="Пароль" autoComplete='off'/>
-                                        <button type='submit' disabled={submitting}>Войти</button>
-                                        <div>{error.length !=0 ? this.getError(error) : ''}</div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <p className="text-center">
-                            <Link to={`/authentication/recover-password-first-step`}>Забыли пароль?</Link>
-                        </p>
-                    </div>
+                <div className="authentication">
+                    <form onSubmit={handleSubmit((data)=>this.SubmitForm(data))}>
+                        <Field name="user_email" type="email" component={renderField} placeholder="Email" label="Email" autoComplete='off'/>
+                        <Field name="password" type="password" component={renderField} placeholder="Password" label="Password" autoComplete='off'/>
+                        <button type='submit' disabled={submitting}>Login</button>
+                        <div>{error.length !=0 ? this.getError(error) : ''}</div>
+                    </form>
+                    <p className="text-center">
+                        <Link to={`/authentication/recover-password-first-step`}>Forgot password?</Link>
+                    </p>
                 </div>
             </div>
         );
@@ -90,28 +78,28 @@ class SingIn extends Component {
 const validate = values => {
     const errors = {};
     if (!values.password) {
-        errors.password = 'Поле не должно быть пустым'
+        errors.password = 'Required'
     } else if (values.password.length < 8) {
-        errors.password = 'Поле должно быть меньше 8 символов'
+        errors.password = 'The field must be less than 8 characters'
     }
-    if (!values.phone) {
-        errors.phone = 'Поле не должно быть пустым'
-    } else if (/_/i.test(values.phone)) {
-        errors.phone = 'Введите номер телефона'
+    if (!values.user_email) {
+        errors.user_email = 'Required'
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.user_email)) {
+        errors.user_email = 'Enter email'
     }
     return errors
 };
 
-SingIn.contextTypes = {
+SignUp.contextTypes = {
     router: React.PropTypes.shape({
         history: React.PropTypes.object.isRequired,
     }),
 };
 
-SingIn = reduxForm({
-    form: 'Record',
+SignUp = reduxForm({
+    form: 'SignUp',
     validate
-})(SingIn);
+})(SignUp);
 
 function  mapStateToProps(state, props) {
     return{
@@ -124,4 +112,4 @@ function mapDispatchToProps(dispatch) {
     }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SingIn);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

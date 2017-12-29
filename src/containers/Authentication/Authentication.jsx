@@ -2,7 +2,14 @@ import React, {Component, PropTypes} from 'react';
 import { Field, reduxForm } from 'redux-form';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
-import SignIn from '../../components/Authentication/SingIn/SingIn';
+import {
+    Route,
+    Switch,
+    Redirect
+} from 'react-router-dom';
+import SignIn from '../../components/Authentication/SignIn/SignIn';
+import SignUp from '../../components/Authentication/SignUp/SignUp';
+import RecoverPasswordFirstStep from '../../components/Authentication/RecoverPasswordFirstStep/RecoverPasswordFirstStep';
 
 
 class Authentication extends Component {
@@ -24,8 +31,9 @@ class Authentication extends Component {
                         <Route
                             path={ this.baseUrl }
                             exact
-                            component={SignIn}
+                            component={SignUp}
                         />
+                        <Route path={`${match.url}/recover-password-first-step`} component={RecoverPasswordFirstStep}/>
                         {/*<Route path={`${match.url}/recover-password-first-step`} component={RecoverPasswordFirst}/>*/}
                     </div>
                 }
