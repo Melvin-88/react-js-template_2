@@ -5,13 +5,13 @@ class Header extends Component {
     render(){
         return (
             <div className='Header'>
-            <div className="logo">
-                LOGO
+                <div className="logo">
+                    <span>LOGO</span>
+                </div>
+                <div className="user_select">
+                    {formated('10,10,2017', 'time')}
+                </div>
             </div>
-            <div className="user_select">
-                {formated('10,10,2017', 'time')}
-            </div>
-        </div>
         );
     }
 }

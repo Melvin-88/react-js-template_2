@@ -5,10 +5,10 @@ import { bindActionCreators } from 'redux';
 import {
     Link
 } from 'react-router-dom';
+import RaisedButton from 'material-ui/RaisedButton';
 import {
     loginStepFirst
 } from '../../../actions/userActions';
-import MaskedInput from "react-maskedinput";
 
 
 const renderField = ({ input, label, placeholder, type, id, meta: { touched, error, warning } }) => (
@@ -60,15 +60,19 @@ class SignUp extends Component {
         return (
             <div>
                 <div className="authentication">
-                    <form onSubmit={handleSubmit((data)=>this.SubmitForm(data))}>
-                        <Field name="user_email" type="email" component={renderField} placeholder="Email" label="Email" autoComplete='off'/>
-                        <Field name="password" type="password" component={renderField} placeholder="Password" label="Password" autoComplete='off'/>
-                        <button type='submit' disabled={submitting}>Login</button>
-                        <div>{error.length !=0 ? this.getError(error) : ''}</div>
-                    </form>
-                    <p className="text-center">
-                        <Link to={`/authentication/recover-password-first-step`}>Forgot password?</Link>
-                    </p>
+                    <span className="title">Collectly</span>
+                    <div>
+                        <span className="description">Welcome back. Please login to your account.</span>
+                        <form onSubmit={handleSubmit((data)=>this.SubmitForm(data))}>
+                            <Field name="user_email" type="email" component={renderField} placeholder="Email" label="Email" autoComplete='off'/>
+                            <Field name="password" type="password" component={renderField} placeholder="Password" label="Password" autoComplete='off'/>
+                            <RaisedButton label="Login" className={'btn btn_primary'} primary={true} fullWidth={true} type="submit"/>
+                            <div>{error.length !=0 ? this.getError(error) : ''}</div>
+                        </form>
+                        <p className="error_message">
+                            <Link to={`/authentication/recover-password-first-step`}>Forgot password?</Link>
+                        </p>
+                    </div>
                 </div>
             </div>
         );

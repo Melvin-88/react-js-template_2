@@ -17,6 +17,7 @@ module.exports = {
         publicPath: '/',
         hash: true,
         filename: "assets/build/[name].[chunkhash:8].js",
+        sourceMapFilename: "[name].[chunkhash:8].js.map",
         chunkFilename: "assets/build/[name].[chunkhash:8].js",
     },
     module: {
@@ -58,6 +59,7 @@ module.exports = {
             }
         ]
     },
+    devtool: "source-map",
     resolve: {
         extensions: ['', '.js', '.jsx']
     },
