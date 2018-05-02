@@ -72,7 +72,9 @@ class SignIn extends Component {
                                         {!loader ?
                                             <RaisedButton type='submit' className={'btn btn_sign_in'} labelStyle={{height: '40px'}} label="Sign in" disabled={submitting}/>
                                             :
-                                            <div className="btn_loader"><img src="../../../assets/img/loader.svg" alt="loader"/></div>
+                                            <div className="btn_loader">
+                                                <img src="../../../../assets/img/loader.svg" alt=""/>
+                                            </div>
                                         }
                                         <div className="global-error">{error.length !=0 ? this.getError(error) : ''}</div>
                                     </div>
