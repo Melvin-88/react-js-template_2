@@ -3,37 +3,41 @@ import { Field, reduxForm } from 'redux-form';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
 import RaisedButton from 'material-ui/RaisedButton';
-import { postLogin } from '../../../actions/userActions';
-import {Link} from 'react-router-dom';
+import {
+    postConfirm,
+    postResend
+} from '../../../actions/userActions';
 import {
     TextField
-} from 'redux-form-material-ui';
-import './SignIn.scss';
+} from 'redux-form-material-ui'
 
-class SignIn extends Component {
+class Confirm extends Component {
     state={
         loader: false
     };
-    componentWillMount() {
-        sessionStorage.clear();
-    }
     SubmitForm=(data)=>{
         this.setState({
             loader: true
         });
         let obj = {
-            phone: data.phone.indexOf('+') === 0 ? data.phone : '+'+data.phone,
-            password: data.password
+            login_code: data.code
         };
-        this.props.postLogin(obj).then((res)=>{
+        this.props.postConfirm(obj).then((res)=>{
             this.setState({
                 loader: false
             });
             if(res.payload && res.payload.status && res.payload.status == 200 || res.payload && res.payload.status && res.payload.status == 201){
-                sessionStorage.id = res.payload.data.user_id;
-                this.context.router.history.push('/authentication/confirm/');
+                sessionStorage.clear();
+                sessionStorage.token = res.payload.data.token;
+                this.context.router.history.push('/dashboard');
             }
         });
+    };
+    resendForm=()=>{
+        let obj = {
+            user: sessionStorage.id
+        };
+        this.props.postResend(obj);
     };
     getError=(error)=>{
         let message = [];
@@ -62,12 +66,9 @@ class SignIn extends Component {
                             <div className="inner__block">
                                 <form onSubmit={handleSubmit((data)=>{this.SubmitForm(data)})}>
                                     <div className="form-wrapper">
-                                        <h2 className="auth-header">Sign in</h2>
+                                        <h2 className="auth-header">Sign in <br/><span className="auth-header-span">You have sent a text message with a code</span></h2>
                                         <div className="inner-div_text">
-                                            <Field name="phone"  className="phone-input" type="number" component={TextField} placeholder="Phone" autoComplete='off'/>
-                                        </div>
-                                        <div className="inner-div_text">
-                                            <Field name="password" type="password" className="phone-input" component={TextField} placeholder="Password" autoComplete='off'/>
+                                            <Field name="code" type="text" component={TextField} placeholder="SMS code" autoComplete='off'/>
                                         </div>
                                         {!loader ?
                                             <RaisedButton type='submit' className={'btn btn_sign_in'} labelStyle={{height: '40px'}} label="Sign in" disabled={submitting}/>
@@ -79,12 +80,10 @@ class SignIn extends Component {
                                 </form>
                             </div>
                         </div>
-                        <div className="sign-options">
-                            <Link to="/authentication/password-recovery/first-step" className="option-link">Forgot your password?</Link>
-                            <div>
-                                <span className="pre-option-link">No account yet? </span>
-                                <Link to="/authentication/sign-up" className="option-link">Sign up now</Link>
-                            </div>
+                        <div className="bottom-nav">
+                            <p className="center">
+                                <span className="gray">Did not receive SMS? </span><span className="like-btn" onClick={e=>this.resendForm()}>Send again</span>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -95,39 +94,33 @@ class SignIn extends Component {
 
 const validate = values => {
     const errors = {};
-    if (!values.password) {
-        errors.password = 'Required'
-    } else if (values.password.length < 8) {
-        errors.password = 'The field can not be less than 8 characters'
-    }
-    if (!values.phone) {
-        errors.phone = 'Required'
-    } else if (!/^((8|\+7|\+3)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,13}$/.test(values.phone)) {
-        errors.phone = 'Enter phone number'
+    if (!values.code) {
+        errors.code = 'Required'
     }
     return errors
 };
 
-SignIn.contextTypes = {
+Confirm.contextTypes = {
     router: React.PropTypes.shape({
         history: React.PropTypes.object.isRequired,
     }),
 };
 
-SignIn = reduxForm({
-    form: 'SignIn',
+Confirm = reduxForm({
+    form: 'ConfirmForm',
     validate
-})(SignIn);
+})(Confirm);
 
-function  mapStateToProps(state) {
+function mapStateToProps(state) {
     return{
-        main: state.main,
+        main: state.main
     }
 }
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        postLogin
+        postConfirm,
+        postResend
     }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
+export default  connect(mapStateToProps, mapDispatchToProps)(Confirm);

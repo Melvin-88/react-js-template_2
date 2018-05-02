@@ -1,0 +1,173 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  background-color: #fafbfd;
+  position: relative;
+  .sign-up-block {
+    padding-top: 20vh;
+    font-family: Roboto,sans-serif;
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+    .logo {
+      padding-top: 7vh;
+      text-align: center;
+      margin-bottom: 50px;
+      cursor: pointer;
+    }
+    .authentication__box {
+      background-color: #fff;
+      border-radius: 5px;
+      border: 1px solid #e8e9eb;
+      padding: 30px 100px 50px;
+      &+a{
+        margin-top: 15px;
+        display: inline-block;
+      }
+    }
+  }
+}
+.phone-input {
+  border: 1px solid #e5e6e7;
+  border-radius: 5px;
+  display: block;
+  width: 92%;
+  height: 52px;
+  line-height: 40px;
+  font-size: 16px;
+
+  &::placeholder {
+  color: #a3afbe;
+    padding: 0;
+  }
+  input{
+    &::placeholder{
+      padding: 0;
+      margin-left: 0;
+    }
+  }
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.form-wrapper .error_border .phone-error {
+  display: block;
+  width: 200px;
+  font-size: 12px;
+  position: absolute;
+  left: -103px;
+}
+.auth-header {
+  text-align: center;
+  font-size: 24px;
+  margin: 20px 0 40px;
+  font-weight: 600;
+}
+.auth-header-span {
+  color: #acaeb3;
+  font-size: 15px;
+  display: inline-block;
+  padding-top: 20px;
+  line-height: 20px;
+}
+.center {
+  text-align: center;
+  width: 100%;
+}
+
+.btn{
+  -webkit-border-radius: 5px !important;
+  -moz-border-radius: 5px !important;
+  border-radius: 5px !important;
+  padding: 0 !important;
+  button{
+    -webkit-border-radius: 5px !important;
+    -moz-border-radius: 5px !important;
+    border-radius: 5px !important;
+    span{
+      font-size: 14px !important;
+      text-transform: none !important;
+      font-weight:  400 !important;
+      color: #fff !important;
+    }
+  }
+}
+.btn_sign_in{
+  min-width: 100% !important;
+  margin: 0 0 10px 0 !important;
+  button{
+    color: #fff !important;
+    background-color: #0077ff !important;
+    border-color: #2570c3 !important;
+    line-height: 54px !important;
+    height: 54px !important;
+    & > div > div {
+      height: 54px !important;
+    }
+  }
+}
+
+.form-wrapper {
+  div{
+    border: none !important;
+  }
+  hr{
+    display: none !important;
+  }
+}
+.inner-div_text{
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 30px;
+  &>div{
+    height: 54px !important;
+    line-height: 54px !important;
+    width: 100% !important;
+    display: block !important;
+    & > input {
+      border: 1px solid #e5e6e7 !important;
+      border-radius: 5px !important;
+      display: block !important;;
+      padding: 0 15px !important;
+      width: 100% !important;
+      height: 52px !important;
+      line-height: 40px !important;
+    }
+    div{
+      top: 4px !important;
+      left: 0 !important;
+    }
+  }
+}
+.like-btn {
+  color: #0077ff;
+  text-decoration: underline;
+  cursor: pointer;
+  &:hover {
+    text-decoration: none;
+  }
+}
+.global-error {
+  font-size: 14px;
+  text-align: center;
+  color: rgb(244, 67, 54);
+}
+.sign-options {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.option-link {
+  color: #0077ff;
+}
+.pre-option-link {
+  color: #bfc2c5;
+  margin: 0 10px;
+}
+.bottom-nav{
+  margin-top: 15px;
+}

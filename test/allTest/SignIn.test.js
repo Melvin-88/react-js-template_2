@@ -49,6 +49,5 @@ it('SignIn renders correctly', () => {
     ).toJSON();
 
     expect(tree).toMatchSnapshot();
-    
-    console.log(tree.find('input'))
+
 });

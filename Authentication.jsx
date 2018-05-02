@@ -4,7 +4,7 @@ import {
     Switch,
     Redirect
 } from 'react-router-dom';
-import NoMatch from '../NoMatch/NoMatch';
+import NoMatch from '../../containers/NoMatch/NoMatch';
 import SignIn from '../../components/Authentication/SignIn/SignIn';
 import Confirm from '../../components/Authentication/Confirm/Confirm';
 import Activation from '../../components/Authentication/Activation/Activation';

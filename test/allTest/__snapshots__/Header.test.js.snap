@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render a document title and a parent title 1`] = `
+<div
+  className="Header"
+>
+  <div
+    className="logo"
+  >
+    <span>
+      LOGO
+    </span>
+  </div>
+  <div
+    className="user_select"
+  >
+    00:00
+  </div>
+  <div
+    className="img_box"
+  >
+    <img
+      alt=""
+      src="111.png"
+    />
+  </div>
+  <ul>
+    <li
+      key="0"
+    >
+      1
+    </li>
+    <li
+      key="1"
+    >
+      2
+    </li>
+    <li
+      key="2"
+    >
+      3
+    </li>
+    <li
+      key="3"
+    >
+      4
+    </li>
+  </ul>
+</div>
+`;
