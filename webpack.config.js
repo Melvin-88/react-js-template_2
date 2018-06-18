@@ -17,7 +17,6 @@ module.exports = {
         publicPath: '/',
         hash: true,
         filename: "assets/build/[name].[chunkhash:8].js",
-        sourceMapFilename: "[name].[chunkhash:8].js.map",
         chunkFilename: "assets/build/[name].[chunkhash:8].js",
     },
     module: {
@@ -59,7 +58,6 @@ module.exports = {
             }
         ]
     },
-    devtool: "source-map",
     resolve: {
         extensions: ['', '.js', '.jsx']
     },
@@ -68,80 +66,81 @@ module.exports = {
         contentBase: './'
     },
     plugins: NODE_ENV.toString() == 'production' ? [
-            new CleanWebpackPlugin(['assets/build'], {
-                root: __dirname,
-                verbose: true,
-                dry: false
-            }),
-            new webpack.ProvidePlugin({
-                $: "jquery",
-                jQuery: "jquery"
-            }),
-            new webpack.DefinePlugin({
-                NODE_ENV: JSON.stringify(NODE_ENV)
-            }),
-            new ExtractTextPlugin("./assets/build/stylesheet.[contenthash:8].css"),
-            new OptimizeCSSAssetsPlugin(),
-            new webpack.HotModuleReplacementPlugin(),
-            new webpack.NoErrorsPlugin(),
-            new webpack.optimize.CommonsChunkPlugin('./assets/build/build.js', Infinity),
-            new webpack.optimize.AggressiveMergingPlugin(),
-            // new webpack.optimize.DedupePlugin(),
-            new webpack.optimize.OccurenceOrderPlugin(),
-            new webpack.optimize.UglifyJsPlugin({
-                beautify: false,
+        new CleanWebpackPlugin(['assets/build'], {
+            root: __dirname,
+            verbose: true,
+            dry: false
+        }),
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery"
+        }),
+        new webpack.DefinePlugin({
+            NODE_ENV: JSON.stringify(NODE_ENV)
+        }),
+        new ExtractTextPlugin("./assets/build/stylesheet.[contenthash:8].css"),
+        new OptimizeCSSAssetsPlugin(),
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoErrorsPlugin(),
+        new webpack.optimize.CommonsChunkPlugin('./assets/build/build.js', Infinity),
+        new webpack.optimize.AggressiveMergingPlugin(),
+        // new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+            beautify: false,
+            comments: false,
+            mangle: true,
+            sourceMap: true,
+            minimize: false,
+            compress: {
+                warnings     : false,
+                pure_getters : false,
+                unsafe_comps : false,
+                screw_ie8    : false,
+                dead_code    : true,
+                sequences    : true,
+                booleans     : true,
+                loops        : true,
+                unused       : true,
+                drop_console : true,
+                unsafe       : true
+            },
+            output: {
                 comments: false,
-                mangle: true,
-                sourceMap: true,
-                minimize: false,
-                compress: {
-                    warnings     : false,
-                    pure_getters : false,
-                    unsafe_comps : false,
-                    screw_ie8    : false,
-                    dead_code    : true,
-                    sequences    : true,
-                    booleans     : true,
-                    loops        : true,
-                    unused       : true,
-                    drop_console : true,
-                    unsafe       : true
-                },
-                output: {
-                    comments: false,
-                    screw_ie8: true
-                }
-            }),
-            new HtmlWebpackPlugin({
-                template: 'src/index.html',
-                inject: true,
-                cashe: true,
-                minify: {
-                    removeComments: true,
-                    collapseWhitespace: true,
-                    removeRedundantAttributes: true,
-                    useShortDoctype: true,
-                    removeEmptyAttributes: true,
-                    removeStyleLinkTypeAttributes: true,
-                    keepClosingSlash: true,
-                    minifyJS: true,
-                    minifyCSS: true,
-                    minifyURLs: true
-                }
-            })
-        ] : [
-            new webpack.ProvidePlugin({
-                $: "jquery",
-                jQuery: "jquery"
-            }),
-            new webpack.optimize.CommonsChunkPlugin('./assets/build/build.js'),
-            new webpack.DefinePlugin({
-                NODE_ENV: JSON.stringify(NODE_ENV)
-            }),
-            new ExtractTextPlugin("./assets/build/stylesheet.[contenthash:8].css"),
-            new HtmlWebpackPlugin({
-                template: 'src/index.html',
-                cashe: true
-            })
-        ]
+                screw_ie8: true
+            }
+        }),
+        new HtmlWebpackPlugin({
+            template: 'src/index.html',
+            inject: true,
+            cashe: true,
+             hash: true,
+            minify: {
+                removeComments: true,
+                collapseWhitespace: true,
+                removeRedundantAttributes: true,
+                useShortDoctype: true,
+                removeEmptyAttributes: true,
+                removeStyleLinkTypeAttributes: true,
+                keepClosingSlash: true,
+                minifyJS: true,
+                minifyCSS: true,
+                minifyURLs: true
+            }
+        })
+    ] : [
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery"
+        }),
+        new webpack.optimize.CommonsChunkPlugin('./assets/build/build.js'),
+        new webpack.DefinePlugin({
+            NODE_ENV: JSON.stringify(NODE_ENV)
+        }),
+        new ExtractTextPlugin("./assets/build/stylesheet.[contenthash:8].css"),
+        new HtmlWebpackPlugin({
+            template: 'src/index.html',
+            cashe: true
+        })
+    ]
 };

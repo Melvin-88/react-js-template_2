@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -16,8 +17,8 @@ class Users extends Component {
 }
 
 Users.contextTypes = {
-    router: React.PropTypes.shape({
-        history: React.PropTypes.object.isRequired,
+    router: PropTypes.shape({
+        history: PropTypes.object.isRequired,
     }),
 };
 
